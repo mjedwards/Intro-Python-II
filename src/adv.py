@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -38,14 +39,45 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+player_1 = Player("tom", 17, room['outside'])
 
 # Write a loop that:
-#
+while True:
 # * Prints the current room name
+    current_room = player_1.current_room
+    print(player_1.name + ' is in ' + current_room.name )
 # * Prints the current description (the textwrap module might be useful here).
+    print(player_1.current_room.description)
 # * Waits for user input and decides what to do.
-#
+    user_input = input("Where do we go? ['n', 's', 'e', 'w']")
 # If the user enters a cardinal direction, attempt to move to the room there.
+    if user_input == "n":
+        if hasattr(current_room, "n_to"): 
+        # if current_room.n_to is not None:
+            player_1.current_room = getattr(current_room, "n_to")
+            player_1.current_room = current_room.n_to
+    if user_input == "s": 
+        if hasattr(current_room, "s_to"): 
+        # if current_room.s_to is not None:
+            player_1.current_room = getattr(current_room, "s_to")
+            player_1.current_room = current_room.s_to
+    if user_input == "e": 
+        if hasattr(current_room, "e_to"): 
+        # if current_room.e_to is not None:
+            player_1.current_room = getattr(current_room, "e_to")
+            player_1.current_room = current_room.e_to
+    if user_input == "w": 
+        if hasattr(current_room, "w_to"): 
+        # if current_room.w_to is not None:
+            player_1.current_room = getattr(current_room, "w_to")
+            player_1.current_room = current_room.w_to
+    elif user_input == "q":
+        break
+    else: 
+        pass
+
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+
